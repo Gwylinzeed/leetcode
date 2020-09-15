@@ -14,15 +14,35 @@
 // 👍 4878 👎 0
 
 
-package com.shuzijun.leetcode.editor.cn;
+package com.shuzijun.leetcode.editor.algorithm;
+
 
 import com.shuzijun.leetcode.editor.assist.ListNode;
 
-import java.util.Objects;
-
 public class AddTwoNumbers {
     public static void main(String[] args) {
+        int n = 9, i = 7;
+        ListNode l1 = new ListNode(1);
+        ListNode l2 = new ListNode(1);
+        ListNode p = l1;
+        ListNode q = l2;
+
+        while (i <= n) {
+            ListNode cu = new ListNode(i);
+            p.setNext(cu);
+            q.setNext(cu);
+            p = p.getNext();
+            q = q.getNext();
+
+            i++;
+        }
+
         Solution solution = new AddTwoNumbers().new Solution();
+        ListNode listNode = solution.addTwoNumbers(l1, l2);
+        while (listNode != null) {
+            System.out.println(listNode.getValue());
+            listNode = listNode.getNext();
+        }
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 
@@ -37,23 +57,41 @@ public class AddTwoNumbers {
     class Solution {
 
         public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-            ListNode dummyHead = new ListNode(0);
-            ListNode p = l1, q = l2, curr = dummyHead;
+//            ListNode dummyHead = new ListNode(0);
+//            ListNode p = l1, q = l2, curr = dummyHead;
+//            int carry = 0;
+//            while (p != null || q != null) {
+//                int x = p != null ? p.getValue() : 0;
+//                int y = q != null ? q.getValue() : 0;
+//                int sum = x + y + carry;
+//                carry = sum / 10;
+//                curr.setNext(new ListNode(sum % 10));
+//                curr = curr.getNext();
+//                if (p != null) p = p.getNext();
+//                if (q != null) q = q.getNext();
+//            }
+//            if (carry > 0) {
+//                curr.setNext(new ListNode(carry));
+//            }
+//            return dummyHead.getNext();
+            ListNode head = new ListNode(0);
+            ListNode p = l1, q = l2, curr = head;
             int carry = 0;
+
             while (p != null || q != null) {
-                int x = p != null ? p.getValue() : 0;
-                int y = q != null ? q.getValue() : 0;
+                int x = p == null ? 0 : p.getValue();
+                int y = q == null ? 0 : q.getValue();
                 int sum = x + y + carry;
                 carry = sum / 10;
                 curr.setNext(new ListNode(sum % 10));
                 curr = curr.getNext();
-                if(p!=null) p = p.getNext();
-                if(q!=null) q = q.getNext();
+                if (p != null) p = p.getNext();
+                if (q != null) q = q.getNext();
             }
-            if (carry > 0){
+            if (carry > 0) {
                 curr.setNext(new ListNode(carry));
             }
-            return dummyHead.getNext();
+            return head.getNext();
 
         }
 //        public ListNode addTwoNumbers1(ListNode l1, ListNode l2) {

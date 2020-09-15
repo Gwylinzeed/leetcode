@@ -8,7 +8,7 @@ public class ListNode {
 
     }
     public ListNode(int x) {
-        value = x;
+        setValue(x);
     }
 
 
